@@ -98,6 +98,7 @@ int check_strlen(int ret)
     char three[] = "1234567890";
  
     printf("\n\nft_strlen\n");
+    if (ft_strlen(one) == 3)
         ok();
     else
     {
