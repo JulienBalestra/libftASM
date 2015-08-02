@@ -77,14 +77,10 @@ int strlen_arg(int ret, char *str)
 
 int check_strlen(int ret)
 {
-    char one[] = "123";
-    char two[] = "";
-    char three[] = "1234567890";
- 
     printf("\n\nft_strlen\n");
-    ret = strlen_arg(ret, one);
-    ret = strlen_arg(ret, two);
-    ret = strlen_arg(ret, three);
+    ret = strlen_arg(ret, "123");
+    ret = strlen_arg(ret, "");
+    ret = strlen_arg(ret, "1234567890");
     return (ret);
 }
 
@@ -112,10 +108,9 @@ int check_bzero(int ret)
 
 int check_memset(int ret)
 {
-    char *ptr;
+    char *ptr = NULL;
     int i = 50;
-    
-    ptr = NULL;
+
     printf("\n\nft_memset\n");
     ptr = (char *)malloc(sizeof(char) * i);
     ft_memset(ptr, 0, i);
@@ -134,11 +129,10 @@ int check_memset(int ret)
 
 int check_memalloc(int ret)
 {
-    char *ptr;
+    char *ptr = NULL;
     int i = 50;
     int j = 0;
-    
-    ptr = NULL;
+
     printf("\n\nft_memalloc\n");
     ptr = ft_memalloc(i);
     while (j < i)
@@ -294,7 +288,6 @@ int main(void)
     ret = check_strdup(ret);
     call_cat();
     check_power(ret);
-
     printf("\n\nfailed: %i\n", ret);
     return (ret > 0 ? 1 : 0);
 }
