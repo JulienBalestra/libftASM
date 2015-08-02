@@ -38,7 +38,7 @@ int	check_is(int ret, int (*mine)(int c), int c, int (*real)(int c))
     }
 }
 
-int iter_check_is(char *title, char *str, int ret, int (*mine)(int c), int c, int (*real)(int c))
+int iter_check_is(char *title, char *str, int ret, int (*mine)(int c), int (*real)(int c))
 {
     int i;
     
@@ -57,38 +57,32 @@ int is_to_something(int ret)
     char upp[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     int i;
     
-    iter_check_is("ft_isalpha", str, ret, ft_isalpha, str[i], isalpha);
-    iter_check_is("ft_isdigit", str, ret, ft_isdigit, str[i], isdigit);
-    iter_check_is("ft_isalnum", str, ret, ft_isalnum, str[i], isalnum);
-    iter_check_is("ft_isblank", str, ret, ft_isblank, str[i], isblank);
-    iter_check_is("ft_isascii", str, ret, ft_isascii, str[i], isascii);
-    iter_check_is("ft_isprint", str, ret, ft_isprint, str[i], isprint);
-
-    printf("\n\nft_islower\n");
-    for (i = 0 ; i < strlen(low) ; i++)
-        ret = check_is(ret, ft_islower, low[i], islower);
-    for (i = 0 ; i < strlen(upp) ; i++)
-        ret = check_is(ret, ft_islower, upp[i], islower);
-                
-    printf("\n\nft_isupper\n");
-    for (i = 0 ; i < strlen(low) ; i++)
-        ret = check_is(ret, ft_isupper, low[i], isupper);
-    for (i = 0 ; i < strlen(upp) ; i++)
-        ret = check_is(ret, ft_isupper, upp[i], isupper);
+    ret = iter_check_is("ft_isalpha", str, ret, ft_isalpha, isalpha);
+    ret = iter_check_is("ft_isdigit", str, ret, ft_isdigit, isdigit);
+    ret = iter_check_is("ft_isalnum", str, ret, ft_isalnum, isalnum);
+    ret = iter_check_is("ft_isblank", str, ret, ft_isblank, isblank);
+    ret = iter_check_is("ft_isascii", str, ret, ft_isascii, isascii);
+    ret = iter_check_is("ft_isprint", str, ret, ft_isprint, isprint);
+    ret = iter_check_is("ft_islower", str, ret, ft_islower, islower);
+    ret = iter_check_is("ft_isupper", str, ret, ft_isupper, isupper);
     
-    printf("\n\nft_toupper\n");
-    for (i = 0 ; i < strlen(low) ; i++)
-        ret = check_is(ret, ft_toupper, low[i], toupper);
-    for (i = 0 ; i < strlen(upp) ; i++)
-        ret = check_is(ret, ft_toupper, upp[i], toupper);
-          
-    printf("\n\nft_tolower\n");
-    for (i = 0 ; i < strlen(low) ; i++)
-        ret = check_is(ret, ft_tolower, low[i], tolower);
-    for (i = 0 ; i < strlen(upp) ; i++)
-        ret = check_is(ret, ft_tolower, upp[i], tolower);
-    
+    ret = iter_check_is("ft_toupper", str, ret, ft_toupper, toupper);
+    ret = iter_check_is("ft_tolower", str, ret, ft_tolower, tolower);
     return (ret);
+}
+
+int strlen_arg(int ret, char *str)
+{
+    if (ft_strlen(str) == strlen(str))
+    {
+        ok();
+        return (ret);
+    }
+    else
+    {
+        ko();
+        return (1 + ret);
+    }
 }
 
 int check_strlen(int ret)
@@ -98,27 +92,9 @@ int check_strlen(int ret)
     char three[] = "1234567890";
  
     printf("\n\nft_strlen\n");
-    if (ft_strlen(one) == 3)
-        ok();
-    else
-    {
-        ko();
-        ret++;
-    }
-    if (ft_strlen(two) == 0)
-        ok();
-    else
-    {
-        ko();
-        ret++;
-    }
-    if (ft_strlen(three) == 10)
-        ok();
-    else
-    {
-        ko();
-        ret++;
-    }
+    ret = strlen_arg(ret, one);
+    ret = strlen_arg(ret, two);
+    ret = strlen_arg(ret, three);
     return (ret);
 }
 
