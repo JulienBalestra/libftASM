@@ -20,12 +20,7 @@ void ko(void)
 
 int	check_is(int ret, int (*mine)(int c), int c, int (*real)(int c))
 {    
-    if (mine(c) == real(c))
-    {
-        ok();
-        return (ret);
-    }
-    else if (mine(c) == 1 && real(c) != 0)
+    if (mine(c) == real(c) || (mine(c) == 1 && real(c) != 0))
     {
         ok();
         return (ret);
@@ -40,9 +35,8 @@ int	check_is(int ret, int (*mine)(int c), int c, int (*real)(int c))
 
 int iter_check_is(char *title, char *str, int ret, int (*mine)(int c), int (*real)(int c))
 {
-    int i;
-    
-    i = 0;
+    int i = 0;
+
     printf("\n\n%s\n", title);
     for (i = 0 ; i < strlen(str) ; i++)
         ret = check_is(ret, ft_isalpha, str[i], isalpha);
@@ -53,10 +47,7 @@ int iter_check_is(char *title, char *str, int ret, int (*mine)(int c), int (*rea
 int is_to_something(int ret)
 {
     char str[] = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c";
-    char low[] = "abcdefghijklmnopqrstuvwxyz";
-    char upp[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    int i;
-    
+
     ret = iter_check_is("ft_isalpha", str, ret, ft_isalpha, isalpha);
     ret = iter_check_is("ft_isdigit", str, ret, ft_isdigit, isdigit);
     ret = iter_check_is("ft_isalnum", str, ret, ft_isalnum, isalnum);
@@ -65,7 +56,6 @@ int is_to_something(int ret)
     ret = iter_check_is("ft_isprint", str, ret, ft_isprint, isprint);
     ret = iter_check_is("ft_islower", str, ret, ft_islower, islower);
     ret = iter_check_is("ft_isupper", str, ret, ft_isupper, isupper);
-    
     ret = iter_check_is("ft_toupper", str, ret, ft_toupper, toupper);
     ret = iter_check_is("ft_tolower", str, ret, ft_tolower, tolower);
     return (ret);
