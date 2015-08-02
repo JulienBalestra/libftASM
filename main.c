@@ -5,6 +5,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <ctype.h>
 
 
 void    ok(void)
@@ -17,9 +18,14 @@ void ko(void)
     printf("\033[0;31m\033[1mF\033[0m");
 }
 
-int	check_is(int ret, int (*f)(int c), int c, int result)
-{
-    if (f(c) == result)
+int	check_is(int ret, int (*mine)(int c), int c, int (*real)(int c))
+{    
+    if (mine(c) == real(c))
+    {
+        ok();
+        return (ret);
+    }
+    else if (mine(c) == 1 && real(c) != 0)
     {
         ok();
         return (ret);
@@ -27,10 +33,22 @@ int	check_is(int ret, int (*f)(int c), int c, int result)
     else
     {        
         ko();
-        printf("(%i != %i)", f(c), result);
+        printf("(%i != %i)", mine(c),  real(c));
         return (ret + 1);
     }
 }
+
+int iter_check_is(char *title, char *str, int ret, int (*mine)(int c), int c, int (*real)(int c))
+{
+    int i;
+    
+    i = 0;
+    printf("\n\n%s\n", title);
+    for (i = 0 ; i < strlen(str) ; i++)
+        ret = check_is(ret, ft_isalpha, str[i], isalpha);
+    return (ret);
+}
+
 
 int is_to_something(int ret)
 {
@@ -39,53 +57,36 @@ int is_to_something(int ret)
     char upp[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     int i;
     
-    printf("\n\nft_isalpha\n");
-    for (i = 0 ; i < strlen(str) ; i++)
-        ret = check_is(ret, ft_isalpha, str[i], isalpha(str[i]));
-            
-    printf("\n\nft_isdigit\n");
-    for (i = 0 ; i < strlen(str) ; i++)
-        ret = check_is(ret, ft_isdigit, str[i], isdigit(str[i]));
-
-    printf("\n\nft_isalnum\n");
-    for (i = 0 ; i < strlen(str) ; i++)
-        ret = check_is(ret, ft_isalnum, str[i], isalnum(str[i]));
-
-    printf("\n\nft_isblank\n");
-    for (i = 0 ; i < strlen(str) ; i++)
-        ret = check_is(ret, ft_isblank, str[i], isblank(str[i]));
-
-    printf("\n\nft_isascii\n");
-    for (i = 0 ; i < strlen(str) ; i++)
-        ret = check_is(ret, ft_isascii, str[i], isascii(str[i]));
-
-    printf("\n\nft_isprint\n");
-    for (i = 0 ; i < strlen(str) ; i++)
-        ret = check_is(ret, ft_isprint, str[i], isprint(str[i]));
+    iter_check_is("ft_isalpha", str, ret, ft_isalpha, str[i], isalpha);
+    iter_check_is("ft_isdigit", str, ret, ft_isdigit, str[i], isdigit);
+    iter_check_is("ft_isalnum", str, ret, ft_isalnum, str[i], isalnum);
+    iter_check_is("ft_isblank", str, ret, ft_isblank, str[i], isblank);
+    iter_check_is("ft_isascii", str, ret, ft_isascii, str[i], isascii);
+    iter_check_is("ft_isprint", str, ret, ft_isprint, str[i], isprint);
 
     printf("\n\nft_islower\n");
     for (i = 0 ; i < strlen(low) ; i++)
-        ret = check_is(ret, ft_islower, low[i], 1);
+        ret = check_is(ret, ft_islower, low[i], islower);
     for (i = 0 ; i < strlen(upp) ; i++)
-        ret = check_is(ret, ft_islower, upp[i], 0);
+        ret = check_is(ret, ft_islower, upp[i], islower);
                 
     printf("\n\nft_isupper\n");
     for (i = 0 ; i < strlen(low) ; i++)
-        ret = check_is(ret, ft_isupper, low[i], 0);
+        ret = check_is(ret, ft_isupper, low[i], isupper);
     for (i = 0 ; i < strlen(upp) ; i++)
-        ret = check_is(ret, ft_isupper, upp[i], 1);
+        ret = check_is(ret, ft_isupper, upp[i], isupper);
     
     printf("\n\nft_toupper\n");
     for (i = 0 ; i < strlen(low) ; i++)
-        ret = check_is(ret, ft_toupper, low[i], low[i] - 32);    
+        ret = check_is(ret, ft_toupper, low[i], toupper);
     for (i = 0 ; i < strlen(upp) ; i++)
-        ret = check_is(ret, ft_toupper, upp[i], upp[i]);  
+        ret = check_is(ret, ft_toupper, upp[i], toupper);
           
     printf("\n\nft_tolower\n");
     for (i = 0 ; i < strlen(low) ; i++)
-        ret = check_is(ret, ft_tolower, low[i], low[i]);
+        ret = check_is(ret, ft_tolower, low[i], tolower);
     for (i = 0 ; i < strlen(upp) ; i++)
-        ret = check_is(ret, ft_tolower, upp[i], upp[i] + 32);    
+        ret = check_is(ret, ft_tolower, upp[i], tolower);
     
     return (ret);
 }
@@ -97,28 +98,21 @@ int check_strlen(int ret)
     char three[] = "1234567890";
  
     printf("\n\nft_strlen\n");
-    if (ft_strlen(one) == 3)
-    {
-        ok();        
-    }
+        ok();
     else
     {
         ko();
         ret++;
     }
     if (ft_strlen(two) == 0)
-    {
-        ok();        
-    }
+        ok();
     else
     {
         ko();
         ret++;
     }
     if (ft_strlen(three) == 10)
-    {
-        ok();        
-    }
+        ok();
     else
     {
         ko();
