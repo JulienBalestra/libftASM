@@ -4,21 +4,32 @@ extern ft_bzero
 section	.text
 	global ft_memalloc
 
-ft_memalloc:
-	enter	0, 0
-	push	rdi
-	call	malloc
-	cmp	rax, 0
-	je	exit
-	pop	rdi
-	push rdi
-	push	rax
-	mov	rsi, rdi
-	mov	rdi, rax
-	call	ft_bzero
-	pop	rax
+section .text
 
-exit:
-	pop rdi
-	leave
+ft_memalloc:
+	push rbp
+	mov rbp, rsp
+	sub rsp, 0x10
+
+	test rdi, rdi
+	jz ret_null
+
+	mov [rbp - 0x8], rdi
+	call malloc
+	test rax, rax
+	jz ret_null
+
+	mov rdi, rax
+	mov rsi, [rbp - 0x8]
+	mov [rbp - 0x10], rax
+	call ft_bzero
+	mov rax, [rbp - 0x10]
+	jmp done
+
+ret_null:
+	xor rax, rax
+
+done:
+	mov rsp, rbp
+	pop rbp
 	ret

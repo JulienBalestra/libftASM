@@ -21,11 +21,17 @@ ft_puts:
 	mov rdx, rax
 	mov rcx, rdi
 	mov rax, WRITE
-	mov rdi, 1
+	mov rdi, 1 ; stdout
 	mov rsi, rcx
 	syscall
-	jc abort
-	jmp good_ndl
+	mov rax, WRITE
+    mov rdi, 1
+    lea rsi, [endline]
+	mov rdx, 1
+    syscall
+    mov rax, 42
+	ret
+	leave
 
 good_ndl:
 	mov rax, WRITE
@@ -35,6 +41,7 @@ good_ndl:
 	syscall
 	mov rax, 42
 	ret
+	leave
 
 null:
 	mov rax, WRITE
@@ -47,6 +54,3 @@ null:
     syscall
     mov rax, -1
     ret
-
-abort:
-	ret
