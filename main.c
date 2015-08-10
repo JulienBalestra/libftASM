@@ -235,7 +235,7 @@ int check_strdup(int ret)
 void check_puts(void)
 {
     printf("\n\nft_puts\n");
-    ft_puts("\nPUTS\n");
+    ft_puts("PUTS\n");
     ft_puts(NULL);
     printf("(null) == OK\n");
 }
