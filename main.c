@@ -8,26 +8,21 @@
 #include <ctype.h>
 
 
-void    ok(void)
+void    is_ok(int ok)
 {
-    printf("\033[0;32m\033[1m.\033[0m");
-}
-
-void ko(void)
-{
-    printf("\033[0;31m\033[1mF\033[0m");
+    ok ? printf("\033[0;32m\033[1m.\033[0m") : printf("\033[0;31m\033[1mF\033[0m");
 }
 
 int	check_is(int ret, int (*mine)(int c), int c, int (*real)(int c))
 {    
     if (mine(c) == real(c) || (mine(c) == 1 && real(c) != 0))
     {
-        ok();
+        is_ok(1);
         return (ret);
     }
     else
     {        
-        ko();
+        is_ok(0);
         printf("(%i != %i)", mine(c),  real(c));
         return (ret + 1);
     }
@@ -65,12 +60,12 @@ int strlen_arg(int ret, char *str)
 {
     if (ft_strlen(str) == strlen(str))
     {
-        ok();
+        is_ok(1);
         return (ret);
     }
     else
     {
-        ko();
+        is_ok(0);
         return (1 + ret);
     }
 }
@@ -96,10 +91,10 @@ int check_bzero(int ret)
     while (--i >= 0)
     {
         if (ptr[i] == 0)
-            ok();
+            is_ok(1);
         else
         {
-            ko();
+            is_ok(0);
             ret++;
         }
     }    
@@ -117,10 +112,10 @@ int check_memset(int ret)
     while (--i >= 0)
     {
         if (ptr[i] == 0)
-            ok();
+            is_ok(1);
         else
         {
-            ko();
+            is_ok(0);
             ret++;
         }
     }    
@@ -138,10 +133,10 @@ int check_memalloc(int ret)
     while (j < i)
     {
         if (ptr[j] == 0)
-            ok();
+            is_ok(1);
         else
         {
-            ko();
+            is_ok(0);
             ret++;
         }
         j++;
@@ -170,12 +165,12 @@ int check_strcat(int ret)
     while (j < i * 2)
     {
         if (j < i && dest[j] == 'a')
-            ok();
+            is_ok(1);
         else if (dest[j] == 'z')
-            ok();
+            is_ok(1);
         else
         {
-            ko();
+            is_ok(0);
             ret++;
         }
         j++;
@@ -194,10 +189,10 @@ int check_memcpy(int ret)
     while (i < ft_strlen(src))
     {
         if (dest[i] == src[i])
-            ok();
+            is_ok(1);
         else
         {
-            ko();
+            is_ok(0);
             ret++;
         }
         i++;
@@ -225,10 +220,10 @@ int check_strdup(int ret)
     while (j < i)
     {
         if (dest[j] == src[j])
-            ok();
+            is_ok(1);
         else
         {
-            ko();
+            is_ok(0);
             ret++;
         }
         j++;
@@ -239,8 +234,7 @@ int check_strdup(int ret)
 void check_puts(void)
 {
     printf("\n\nft_puts\n");
-    ft_puts("\nPUTS");
-    ft_puts("\033[0;32m\033[1m.\033[0m");
+    ft_puts("\nPUTS\n");
     ft_puts(NULL);
     printf("(null) == OK\n");
 }
@@ -262,10 +256,10 @@ int check_power(int ret)
     printf("\n\nft_square\n");
     j = ft_square(i);
     if (j == (i * i))
-        ok();
+        is_ok(1);
     else
     {
-        ko();
+        is_ok(0);
         ret++;
     }
     return (ret);
