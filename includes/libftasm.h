@@ -16,8 +16,8 @@ int ft_puts(const char *s);
 
 /* part two */
 size_t ft_strlen(char *str);
-void *memset(void *s, int c, size_t n);
-void *memcpy(void *dest, const void *src, size_t n);
+void *ft_memset(void *s, int c, size_t n);
+void *ft_memcpy(void *dest, const void *src, size_t n);
 char *ft_strdup(const char *s);
 
 /* Bonus */
