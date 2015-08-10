@@ -1,7 +1,8 @@
 NAME = libfts.a
 CFLAGS = -f
 LFLAGS = ar rc
-CC = nasm
+# Here full path of nasm with macho64 || elf64
+CC = /Volumes/Data/nfs/zfs-student-3/users/2014_paris/jubalest/mybrew/bin/nasm
 RM = rm -f
 INC_DIR = includes
 OBJ_DIR = .objects
