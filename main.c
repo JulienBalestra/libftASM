@@ -53,6 +53,7 @@ int is_to_something(int ret)
     ret = iter_check_is("ft_isupper", str, ret, ft_isupper, isupper);
     ret = iter_check_is("ft_toupper", str, ret, ft_toupper, toupper);
     ret = iter_check_is("ft_tolower", str, ret, ft_tolower, tolower);
+    ret = iter_check_is("ft_isspace", str, ret, ft_isspace, isspace);
     return (ret);
 }
 

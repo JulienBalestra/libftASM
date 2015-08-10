@@ -1,5 +1,5 @@
 section .text
-	global _ft_isspace
+	global ft_isspace
 
 ft_isspace:
 	cmp		rdi, 32
