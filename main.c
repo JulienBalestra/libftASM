@@ -238,8 +238,8 @@ int check_strdup(int ret)
 
 void check_puts(void)
 {
-    printf("\n");
-    ft_puts("\nft_puts");
+    printf("\n\nft_puts\n");
+    ft_puts("\nPUTS");
     ft_puts("\033[0;32m\033[1m.\033[0m");
     ft_puts(NULL);
     printf("(null) == OK\n");
