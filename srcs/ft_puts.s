@@ -24,7 +24,6 @@ ft_puts:
 	mov rdi, 1
 	mov rsi, rcx
 	syscall
-	jc abort
 	jmp good_ndl
 
 good_ndl:
