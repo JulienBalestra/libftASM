@@ -5,6 +5,4 @@
 
 ## How to
 
-make
-make test
-./test
+make && make test && ./test
