@@ -268,9 +268,8 @@ int check_power(int ret)
 
 int main(void)
 {
-    int ret;    
-
-    ret = 0;
+    int ret = 0;  
+ 
     printf("Start testing :");
     ret = is_to_something(ret);
     ret = check_strlen(ret);
