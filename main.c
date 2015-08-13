@@ -142,8 +142,8 @@ int check_memalloc(int ret)
 
 int check_strcat(int ret)
 {
-    char *src;
-    char *dest;
+    char *src = NULL;
+    char *dest = NULL;
     int i = 5;
     int j = 0;
     
