@@ -7,7 +7,6 @@
 #include <fcntl.h>
 #include <ctype.h>
 
-
 void    is_ok(int ok)
 {
     ok ? printf("\033[0;32m\033[1m.\033[0m") : printf("\033[0;31m\033[1mF\033[0m");
@@ -37,7 +36,6 @@ int iter_check_is(char *title, char *str, int ret, int (*mine)(int c), int (*rea
         ret = check_is(ret, ft_isalpha, str[i], isalpha);
     return (ret);
 }
-
 
 int is_to_something(int ret)
 {
@@ -74,18 +72,17 @@ int strlen_arg(int ret, char *str)
 int check_strlen(int ret)
 {
     printf("\n\nft_strlen\n");
-    ret = strlen_arg(ret, "123");
-    ret = strlen_arg(ret, "");
-    ret = strlen_arg(ret, "1234567890");
+    ret = strlen_arg(ret, "123") + ret;
+    ret = strlen_arg(ret, "") + ret;
+    ret = strlen_arg(ret, "1234567890") + ret;
     return (ret);
 }
 
 int check_bzero(int ret)
 {
-    char *ptr;
+    char *ptr = NULL;
     int i = 50;
     
-    ptr = NULL;
     printf("\n\nft_bzero\n");    
     ptr = (char *)malloc(sizeof(char) * i);
     ft_bzero(ptr, i);
@@ -165,9 +162,7 @@ int check_strcat(int ret)
     j = 0;
     while (j < i * 2)
     {
-        if (j < i && dest[j] == 'a')
-            is_ok(1);
-        else if (dest[j] == 'z')
+        if ((j < i && dest[j] == 'a') || dest[j] == 'z')
             is_ok(1);
         else
         {
@@ -203,8 +198,8 @@ int check_memcpy(int ret)
 
 int check_strdup(int ret)
 {
-    char *src;
-    char *dest;
+    char *src = NULL;
+    char *dest = NULL;
     int i = 3;
     int j = 0;
     
@@ -214,7 +209,6 @@ int check_strdup(int ret)
         src[j] = 'a';
         j++;
     }
-    dest = NULL;
     printf("\n\nft_strdup\n");
     dest = ft_strdup(src);
     j = 0;
