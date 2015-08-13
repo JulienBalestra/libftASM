@@ -58,15 +58,13 @@ int is_to_something(int ret)
 int strlen_arg(int ret, char *str)
 {
     if (ft_strlen(str) == strlen(str))
-    {
         is_ok(1);
-        return (ret);
-    }
     else
     {
         is_ok(0);
-        return (1 + ret);
+	ret++;
     }
+    return (ret);
 }
 
 int check_strlen(int ret)
