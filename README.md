@@ -11,6 +11,16 @@ nasm available in $PATH:
 * use brew for Mac OS
 * use apt for Linux
 
+The nasm version have to provide the following output format:
+
+* macho64
+* elf64
+
+Make sure with the following command:
+
+
+	nasm -hf
+
 ## How to
 
 Build the libfts.a:
