@@ -5,4 +5,18 @@
 
 ## How to
 
-make && make test && ./test
+Build the libfts.a:
+
+
+make
+
+Build the testing program:
+
+
+make test
+
+
+Run the testing program:
+
+
+./test
