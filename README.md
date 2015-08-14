@@ -8,15 +8,15 @@
 Build the libfts.a:
 
 
-make
+	make
 
 Build the testing program:
 
 
-make test
+	make test
 
 
 Run the testing program:
 
 
-./test
+	./test
