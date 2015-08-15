@@ -5,6 +5,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <ctype.h>
+#include <string.h>
 
 void    is_ok(int ok)
 {
@@ -14,16 +15,14 @@ void    is_ok(int ok)
 int	check_is(int ret, int (*mine)(int c), int c, int (*real)(int c))
 {    
     if (mine(c) == real(c) || (mine(c) == 1 && real(c) != 0))
-    {
         is_ok(1);
-        return (ret);
-    }
     else
     {        
         is_ok(0);
-        printf("(%i != %i)", mine(c),  real(c));
-        return (ret + 1);
+        printf("([%i] %i != %i)", c, mine(c),  real(c));
+        ret++;
     }
+    return (ret);
 }
 
 int iter_check_is(char *title, char *str, int ret, int (*mine)(int c), int (*real)(int c))
@@ -31,8 +30,8 @@ int iter_check_is(char *title, char *str, int ret, int (*mine)(int c), int (*rea
     int i = 0;
 
     printf("\n\n%s\n", title);
-    for (i = 0 ; i < strlen(str) ; i++)
-        ret = check_is(ret, ft_isalpha, str[i], isalpha);
+    for (i = 0 ; i < (int)strlen(str) ; i++)
+        ret = check_is(ret, mine, str[i], real);
     return (ret);
 }
 
@@ -61,7 +60,7 @@ int strlen_arg(int ret, char *str)
     else
     {
         is_ok(0);
-	ret++;
+	    ret++;
     }
     return (ret);
 }
@@ -147,28 +146,30 @@ int check_strcat(int ret)
     int j = 0;
     
     printf("\nft_strcat\n");
-    src = (char *)malloc(sizeof(char) * i);
-    dest = (char *)malloc(sizeof(char) * (i * 2));
-    while (j < i)
+    if ((src = (char *)malloc(sizeof(char) * i)) && ((dest = (char *)malloc(sizeof(char) * (i * 2)))))
     {
-        src[j] = 'z';
-        dest[j] = 'a';
-        j++;
-    }
-    dest = ft_strcat(dest, src);
-    j = 0;
-    while (j < i * 2)
-    {
-        if ((j < i && dest[j] == 'a') || dest[j] == 'z')
-            is_ok(1);
-        else
+        while (j < i)
         {
-            is_ok(0);
-            ret++;
+            src[j] = 'z';
+            dest[j] = 'a';
+            j++;
         }
-        j++;
+        dest = ft_strcat(dest, src);
+        j = 0;
+        while (j < i * 2)
+        {
+            if ((j < i && dest[j] == 'a') || dest[j] == 'z')
+                is_ok(1);
+            else
+            {
+                is_ok(0);
+                ret++;
+            }
+            j++;
+        }
+        return (ret);
     }
-    return (ret);
+    return (2);
 }
 
 int check_memcpy(int ret)
@@ -179,7 +180,7 @@ int check_memcpy(int ret)
     
     printf("\n\nft_memcpy\n");
     ft_memcpy(dest, src, ft_strlen(src));
-    while (i < ft_strlen(src))
+    while (i < (int)ft_strlen(src))
     {
         if (dest[i] == src[i])
             is_ok(1);
@@ -195,12 +196,11 @@ int check_memcpy(int ret)
 
 int check_strdup(int ret)
 {
-    char *src = NULL;
     char *dest = NULL;
     int i = 3;
     int j = 0;
+    char src[i];
     
-    src = (char *)malloc(sizeof(char) * i);
     while (j < i)
     {
         src[j] = 'a';
@@ -273,6 +273,6 @@ int main(void)
     ret = check_strdup(ret);
     call_cat();
     check_power(ret);
-    printf("\n\nfailed: %i\n", ret);
-    return (ret > 0 ? 1 : 0);
+    printf("\n\nfailed == %i\n", ret);
+    return (ret > 0 ? 2 : 0);
 }

@@ -58,7 +58,7 @@ $(OBJ_DIR)	:
 	mkdir -p $(OBJ_DIR)
 
 test:
-	gcc -o test main.c $(NAME) -I $(INC_DIR)
+	gcc -Wall -Werror -Wextra -o test main.c $(NAME) -I $(INC_DIR)
 
 .phony: clean re fclean
 
