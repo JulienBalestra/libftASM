@@ -71,6 +71,8 @@ int check_strlen(int ret)
     ret = strlen_arg(ret, "123") + ret;
     ret = strlen_arg(ret, "") + ret;
     ret = strlen_arg(ret, "1234567890") + ret;
+    ret = strlen_arg(ret, "1") + ret;
+    ret = strlen_arg(ret, "\0") + ret;
     return (ret);
 }
 
