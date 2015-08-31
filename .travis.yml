@@ -4,7 +4,6 @@ os:
 language: c
 
 before_install:
-  - brew update
   - brew install nasm
 
 script:
