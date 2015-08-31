@@ -21,6 +21,8 @@ Make sure with the following command:
 
 	nasm -hf
 
+Example: nasm 2.11.05
+
 ## How to
 
 Build the libfts.a:
