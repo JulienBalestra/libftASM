@@ -38,7 +38,6 @@ int iter_check_is(char *title, char *str, int ret, int (*mine)(int c), int (*rea
 int is_to_something(int ret)
 {
     char str[] = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c";
-
     ret = iter_check_is("ft_isalpha", str, ret, ft_isalpha, isalpha);
     ret = iter_check_is("ft_isdigit", str, ret, ft_isdigit, isdigit);
     ret = iter_check_is("ft_isalnum", str, ret, ft_isalnum, isalnum);
@@ -80,7 +79,6 @@ int check_bzero(int ret)
 {
     char *ptr = NULL;
     int i = 50;
-    
     printf("\n\nft_bzero\n");    
     ptr = (char *)malloc(sizeof(char) * i);
     ft_bzero(ptr, i);
@@ -101,7 +99,6 @@ int check_memset(int ret)
 {
     char *ptr = NULL;
     int i = 50;
-
     printf("\n\nft_memset\n");
     ptr = (char *)malloc(sizeof(char) * i);
     ft_memset(ptr, 0, i);
@@ -123,7 +120,6 @@ int check_memalloc(int ret)
     char *ptr = NULL;
     int i = 50;
     int j = 0;
-
     printf("\n\nft_memalloc\n");
     ptr = ft_memalloc(i);
     while (j < i)
@@ -146,7 +142,6 @@ int check_strcat(int ret)
     char *dest = NULL;
     int i = 5;
     int j = 0;
-    
     printf("\nft_strcat\n");
     if ((src = (char *)malloc(sizeof(char) * i)) && ((dest = (char *)malloc(sizeof(char) * (i * 2)))))
     {
@@ -179,7 +174,6 @@ int check_memcpy(int ret)
     char src[] = "abc";
     char dest[] = "rst";
     int i = 0;
-    
     printf("\n\nft_memcpy\n");
     ft_memcpy(dest, src, ft_strlen(src));
     while (i < (int)ft_strlen(src))
@@ -202,7 +196,6 @@ int check_strdup(int ret)
     int i = 3;
     int j = 0;
     char src[i];
-    
     while (j < i)
     {
         src[j] = 'a';
@@ -236,7 +229,6 @@ void check_puts(void)
 void call_cat(void)
  {
     int fd = 0;
-    
     printf("\n\nft_cat\nHello World !");
     fd = open("hello.world", O_RDONLY);
     ft_cat(fd);    
@@ -246,7 +238,6 @@ int check_power(int ret)
 {
     int i = 5;
     int j = 0;
-    
     printf("\n\nft_square\n");
     j = ft_square(i);
     if (j == (i * i))
@@ -261,8 +252,7 @@ int check_power(int ret)
 
 int main(void)
 {
-    int ret = 0;  
- 
+    int ret = 0;
     printf("Start testing :");
     ret = is_to_something(ret);
     ret = check_strlen(ret);
