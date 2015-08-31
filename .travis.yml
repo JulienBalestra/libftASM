@@ -1,11 +1,11 @@
 os:
-  - linux
   - osx
 
 language: c
 
 before_install:
-  - sudo apt-get install -y nasm
+  - brew update
+  - brew install nasm
 
 script:
   - ./setup.sh
