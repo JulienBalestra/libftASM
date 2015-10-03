@@ -12,6 +12,21 @@ function go_to_dirname
     echo "-> Current directory is" $(pwd)
 }
 
+function apt
+{
+    nasm -h > /dev/null
+    if [ $? -ne 0 ]
+    then
+        apt-get update -qq
+        apt-get install nasm -y
+        if [ $? -ne 0 ]
+        then
+            echo "failed to install nasm"
+            exit 2
+        fi
+    fi
+}
+
 function make_commands
 {
 	make
@@ -20,4 +35,5 @@ function make_commands
 }
 
 go_to_dirname
+apt
 make_commands
