@@ -27,13 +27,5 @@ function apt
     fi
 }
 
-function make_commands
-{
-	make
-	make test
-	./test
-}
-
 go_to_dirname
 apt
-make_commands
